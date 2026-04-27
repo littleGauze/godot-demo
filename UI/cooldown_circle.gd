@@ -12,8 +12,8 @@ extends Control
 
 
 func _draw() -> void:
-	var center := size * 0.5
-	var radius := min(size.x, size.y) * 0.5 - 2.0
+	var center: Vector2 = size * 0.5
+	var radius: float = minf(size.x, size.y) * 0.5 - 2.0
 	if radius <= 0.0:
 		return
 
@@ -21,12 +21,12 @@ func _draw() -> void:
 
 	if progress > 0.0:
 		var points := PackedVector2Array([center])
-		var start_angle := -PI * 0.5
-		var end_angle := start_angle + (TAU * progress)
-		var steps := max(6, int(36 * progress))
+		var start_angle: float = -PI * 0.5
+		var end_angle: float = start_angle + (TAU * progress)
+		var steps: int = maxi(6, int(36.0 * progress))
 		for i in range(steps + 1):
-			var t := float(i) / float(steps)
-			var angle := lerpf(start_angle, end_angle, t)
+			var t: float = float(i) / float(steps)
+			var angle: float = lerpf(start_angle, end_angle, t)
 			points.append(center + Vector2(cos(angle), sin(angle)) * radius)
 		draw_colored_polygon(points, fill_color)
 

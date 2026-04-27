@@ -8,7 +8,7 @@ signal landed
 const SPEED = 130.0
 const ATTACK_RANGE = 85.0
 const MOVE_TARGET_RANGE = 24.0
-const ATTACK_COOLDOWN = 2.0
+const ATTACK_COOLDOWN = 0.5
 const MAX_HEALTH = 180
 const SPAWN_FALL_SPEED_LIMIT = 900.0
 const ATTACK_STATES := [&"attack1", &"attack2", &"attack3"]

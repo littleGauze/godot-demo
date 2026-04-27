@@ -15,12 +15,26 @@
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pkg7o"]
 normal = Vector2(-4.6640826e-14, -1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_bg"]
+bg_color = Color(0.12, 0.05, 0.05, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_fill"]
+bg_color = Color(0.42, 0.08, 0.08, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [node name="World" type="Node2D" unique_id=821143030]
 script = ExtResource("2_jjfx5")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=2077104741]
 layer = -10
-scroll_ignore_camera_zoom = true
+scroll_ignore_camera_zoom = false
 
 [node name="Mountains1" type="ParallaxLayer" parent="ParallaxBackground" unique_id=237057618]
 motion_scale = Vector2(0.1, 0)
@@ -110,6 +124,8 @@ offset_left = 24.0
 offset_top = 20.0
 offset_right = 264.0
 offset_bottom = 44.0
+theme_override_styles/background = SubResource("StyleBoxFlat_health_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_health_fill")
 value = 100.0
 show_percentage = false
 
@@ -136,6 +152,8 @@ offset_left = 344.0
 offset_top = 44.0
 offset_right = 944.0
 offset_bottom = 70.0
+theme_override_styles/background = SubResource("StyleBoxFlat_health_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_health_fill")
 value = 100.0
 show_percentage = false
 

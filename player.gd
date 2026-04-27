@@ -20,17 +20,17 @@ const ATTACK_RANGE = 80.0
 const ATTACK_STATES := [&"attack1", &"attack2", &"attack3"]
 const ACTION_STATES := [&"attack1", &"attack2", &"attack3", &"block"]
 const STATE_DURATIONS := {
-	&"attack1": 0.6,
-	&"attack2": 0.9,
-	&"attack3": 1.0,
+	&"attack1": 0.3,
+	&"attack2": 0.45,
+	&"attack3": 0.5,
 	&"block": 0.3,
 	&"hurt": 0.3,
 	&"death": 0.3,
 }
 const ATTACK_DATA := {
-	&"attack1": {"damage": 14, "hit_time": 0.22},
-	&"attack2": {"damage": 18, "hit_time": 0.32},
-	&"attack3": {"damage": 24, "hit_time": 0.4},
+	&"attack1": {"damage": 14, "hit_time": 0.11},
+	&"attack2": {"damage": 18, "hit_time": 0.16},
+	&"attack3": {"damage": 24, "hit_time": 0.2},
 }
 
 var gravity := ProjectSettings.get_setting("physics/2d/default_gravity") as float
@@ -133,7 +133,7 @@ func _physics_process(delta: float) -> void:
 
 
 func take_damage(amount: int, source_position: Vector2 = Vector2.ZERO) -> void:
-	if is_dead:
+	if is_dead or is_dashing:
 		return
 
 	if is_block and _is_source_in_front(source_position):
@@ -201,6 +201,7 @@ func _process_dash(delta: float) -> void:
 
 	if dash_timer <= 0.0:
 		is_dashing = false
+		_set_dash_enemy_collision_enabled(true)
 		velocity.x = 0.0
 		is_moving = false
 		is_idle = is_on_floor()
@@ -277,6 +278,7 @@ func _die() -> void:
 	is_hurt = false
 	is_block = false
 	is_dashing = false
+	_set_dash_enemy_collision_enabled(true)
 	active_attack = &""
 	attack_has_hit = false
 	velocity.x = 0.0
@@ -298,6 +300,7 @@ func _start_dash(direction: float) -> void:
 	dash_cooldown_timer = DASH_COOLDOWN
 	dash_ghost_timer = 0.0
 	dash_ready_announced = false
+	_set_dash_enemy_collision_enabled(false)
 	dash_direction = direction if not is_zero_approx(direction) else (-1.0 if animated_sprite_2d.flip_h else 1.0)
 	is_idle = false
 	is_moving = true
@@ -358,7 +361,7 @@ func _spawn_dash_ready_particles() -> void:
 			Vector2(-3, 0),
 		])
 		particle.position = spawn_points[i]
-		particle.modulate = Color(0.85, 0.97, 1.0, 0.95)
+		particle.modulate = Color(0.85, 0.97, 1.0, 0.6)
 		particle.z_index = animated_sprite_2d.z_index + 1
 		add_child(particle)
 
@@ -367,6 +370,16 @@ func _spawn_dash_ready_particles() -> void:
 		tween.parallel().tween_property(particle, "modulate:a", 0.0, DASH_READY_PARTICLE_DURATION)
 		tween.parallel().tween_property(particle, "scale", Vector2(0.35, 0.35), DASH_READY_PARTICLE_DURATION)
 		tween.tween_callback(particle.queue_free)
+
+
+func _set_dash_enemy_collision_enabled(is_enabled: bool) -> void:
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if enemy is PhysicsBody2D:
+			var enemy_body := enemy as PhysicsBody2D
+			if is_enabled:
+				remove_collision_exception_with(enemy_body)
+			else:
+				add_collision_exception_with(enemy_body)
 
 
 func _is_target_in_front(target_position: Vector2) -> bool:
