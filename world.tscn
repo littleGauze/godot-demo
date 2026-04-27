@@ -1,0 +1,177 @@
+[gd_scene format=3 uid="uid://qv7uw2xl7r64"]
+
+[ext_resource type="PackedScene" uid="uid://c4hfs881ev2tt" path="res://player.tscn" id="1_f3sb7"]
+[ext_resource type="Texture2D" uid="uid://br4kodjvp37a" path="res://Texture/bg/Mountains - 1.png" id="2_3hgm7"]
+[ext_resource type="Script" uid="uid://ciekfhx8e4bcb" path="res://world.gd" id="2_jjfx5"]
+[ext_resource type="Texture2D" uid="uid://b2pi27aq1mbgw" path="res://Texture/bg/Mountains - 2.png" id="3_6qm4e"]
+[ext_resource type="Texture2D" uid="uid://bd1r7170fe7mn" path="res://Texture/bg/Mountains - 3.png" id="4_ewr8u"]
+[ext_resource type="Texture2D" uid="uid://bju0qdu6xqn6t" path="res://Texture/bg/Mountains - 4.png" id="5_nk0a1"]
+[ext_resource type="Texture2D" uid="uid://c6froj5xotnvt" path="res://Texture/bg/Mountains - 5.png" id="6_8n2gd"]
+[ext_resource type="Texture2D" uid="uid://bjpojlol7vw63" path="res://Texture/bg/Platform - 1.png" id="7_ej65i"]
+[ext_resource type="PackedScene" uid="uid://lv8c6we01sgu" path="res://Enemies/axeman.tscn" id="8_u4mb7"]
+[ext_resource type="PackedScene" uid="uid://bu6v2dlaspnxt" path="res://Items/flag.tscn" id="8_wse8f"]
+[ext_resource type="Script" uid="uid://buvqm0l8lvmtm" path="res://UI/cooldown_circle.gd" id="9_h2b6g"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pkg7o"]
+normal = Vector2(-4.6640826e-14, -1)
+
+[node name="World" type="Node2D" unique_id=821143030]
+script = ExtResource("2_jjfx5")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=2077104741]
+layer = -10
+scroll_ignore_camera_zoom = true
+
+[node name="Mountains1" type="ParallaxLayer" parent="ParallaxBackground" unique_id=237057618]
+motion_scale = Vector2(0.1, 0)
+motion_mirroring = Vector2(1348, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Mountains1" unique_id=361550950]
+scale = Vector2(4, 4)
+texture = ExtResource("2_3hgm7")
+centered = false
+
+[node name="Mountains2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=382232999]
+motion_scale = Vector2(0.2, 0)
+motion_mirroring = Vector2(1348, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Mountains2" unique_id=1459809535]
+scale = Vector2(4, 4)
+texture = ExtResource("3_6qm4e")
+centered = false
+
+[node name="Mountains3" type="ParallaxLayer" parent="ParallaxBackground" unique_id=417939505]
+motion_scale = Vector2(0.35, 0)
+motion_mirroring = Vector2(1348, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Mountains3" unique_id=337969706]
+scale = Vector2(4, 4)
+texture = ExtResource("4_ewr8u")
+centered = false
+
+[node name="Mountains4" type="ParallaxLayer" parent="ParallaxBackground" unique_id=882051510]
+motion_scale = Vector2(0.5, 0)
+motion_mirroring = Vector2(1348, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Mountains4" unique_id=249162456]
+scale = Vector2(4, 4)
+texture = ExtResource("5_nk0a1")
+centered = false
+
+[node name="Mountains5" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1403650480]
+motion_scale = Vector2(0.7, 0)
+motion_mirroring = Vector2(1348, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Mountains5" unique_id=1883758039]
+scale = Vector2(4, 4)
+texture = ExtResource("6_8n2gd")
+centered = false
+
+[node name="Platform1" type="ParallaxLayer" parent="ParallaxBackground" unique_id=2059196916]
+motion_scale = Vector2(1, 0)
+motion_mirroring = Vector2(1348, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Platform1" unique_id=753753042]
+scale = Vector2(4, 4)
+texture = ExtResource("7_ej65i")
+centered = false
+
+[node name="Platform" type="Node2D" parent="." unique_id=1495621664]
+position = Vector2(1.0842022e-19, 514)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Land" type="StaticBody2D" parent="Platform" unique_id=1270101368]
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform/Land" unique_id=200965186]
+shape = SubResource("WorldBoundaryShape2D_pkg7o")
+
+[node name="Items" type="Node2D" parent="Platform" unique_id=1128285059]
+
+[node name="Flag" parent="Platform/Items" unique_id=1593946023 instance=ExtResource("8_wse8f")]
+position = Vector2(388, -34)
+scale = Vector2(4, 4)
+
+[node name="Player" parent="." unique_id=482499423 instance=ExtResource("1_f3sb7")]
+position = Vector2(537.99994, 326)
+scale = Vector2(5, 5)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=370972605]
+
+[node name="Axeman" parent="." unique_id=767115568 instance=ExtResource("8_u4mb7")]
+visible = false
+position = Vector2(988, 326)
+scale = Vector2(6, 6)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=615078899]
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=926304663]
+offset_left = 24.0
+offset_top = 20.0
+offset_right = 264.0
+offset_bottom = 44.0
+value = 100.0
+show_percentage = false
+
+[node name="DashCooldownIndicator" type="Control" parent="CanvasLayer" unique_id=1511720881]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 52.0
+offset_right = 52.0
+offset_bottom = 80.0
+script = ExtResource("9_h2b6g")
+
+[node name="BossLabel" type="Label" parent="CanvasLayer" unique_id=1875218596]
+offset_left = 530.0
+offset_top = 18.0
+offset_right = 755.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 18
+text = "Axeman"
+horizontal_alignment = 1
+
+[node name="BossHealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=268755257]
+offset_left = 344.0
+offset_top = 44.0
+offset_right = 944.0
+offset_bottom = 70.0
+value = 100.0
+show_percentage = false
+
+[node name="InteractLabel" type="Label" parent="CanvasLayer" unique_id=427840924]
+visible = false
+offset_left = 424.0
+offset_top = 112.0
+offset_right = 864.0
+offset_bottom = 144.0
+theme_override_font_sizes/font_size = 20
+text = "Press E to Summon"
+horizontal_alignment = 1
+
+[node name="ResultPanel" type="Panel" parent="CanvasLayer" unique_id=494600193]
+visible = false
+offset_left = 372.0
+offset_top = 204.0
+offset_right = 916.0
+offset_bottom = 468.0
+
+[node name="ResultLabel" type="Label" parent="CanvasLayer/ResultPanel" unique_id=2040513920]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 56.0
+offset_right = 464.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 32
+text = "You Win"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/ResultPanel" unique_id=6942034]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 156.0
+offset_right = 372.0
+offset_bottom = 208.0
+theme_override_font_sizes/font_size = 20
+text = "Restart"

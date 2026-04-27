@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnjoghj0usk88"]
+
+[ext_resource type="PackedScene" uid="uid://de5ahpt1eraof" path="res://agent.tscn" id="1_hgkfk"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_hgkfk"]
+vertices = PackedVector2Array(488.0625, 628, 14.9296875, 633.8672, 11.0625, 20.78125, 139.21875, 18, 246.07813, 18, 903.1094, 637.9922, 426.14063, 15, 1136.0078, 16.96875, 1136.9766, 635.1172)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 0, 4, 6, 7, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(139, 8, 246, 8, 426, 5, 1146, 7, 1147, 645, 903, 648, 488, 638, 5, 644, 1, 11)])
+
+[node name="Navigate2D" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_hgkfk")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D23" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D24" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D25" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D26" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D27" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D28" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D29" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D30" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D31" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D32" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D33" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D4" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D5" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D6" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D7" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D8" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D9" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D10" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D11" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D12" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D13" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D14" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D15" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D16" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D34" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D35" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D36" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D37" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D38" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D39" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D40" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D41" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D42" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D17" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D18" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D19" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D20" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D21" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D22" parent="." instance=ExtResource("1_hgkfk")]
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+vertices = PackedVector2Array(495, 273, 597, 186, 714, 226, 733, 390, 560, 441)

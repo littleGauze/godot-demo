@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://c4an27spm0lh8"]
+
+[ext_resource type="Texture2D" uid="uid://df18cwe4vsey7" path="res://icon.png" id="1_37kl0"]
+[ext_resource type="Texture2D" uid="uid://x2cqqeqfrayk" path="res://icon_n.png" id="2_6uqi0"]
+[ext_resource type="Texture2D" uid="uid://doe41d0qcrw3o" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="2_8uh7m"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ykrsh"]
+diffuse_texture = ExtResource("1_37kl0")
+normal_texture = ExtResource("2_6uqi0")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8uh7m"]
+polygon = PackedVector2Array(-53, -56, -53, -54.1, -56, -52.1, -56, 52.1, -53, 54.1, -53, 56, 52.1, 56, 54.1, 53, 56, 53, 55, -51, 55, -55)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6uqi0"]
+polygon = PackedVector2Array(555, 297, 791, 296, 791, 365, 553, 365)
+
+[node name="test" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [1641.0]
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(9, 5.0625)
+texture = SubResource("CanvasTexture_ykrsh")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(979, 544)
+scale = Vector2(2.5846019, 1.5301975)
+energy = 3.54
+shadow_enabled = true
+shadow_color = Color(0.022994304, 8.446947e-06, 0.040132184, 0)
+texture = ExtResource("2_8uh7m")
+texture_scale = 5.1
+height = 306.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(431, 314)
+texture = ExtResource("1_37kl0")
+metadata/_edit_group_ = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+occluder = SubResource("OccluderPolygon2D_8uh7m")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+enabled = false
+energy = 1.11
+shadow_enabled = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_6uqi0")

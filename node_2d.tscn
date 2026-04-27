@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://vcfngnb7cyqw"]
+
+[ext_resource type="PackedScene" uid="uid://chtwj6jtaq31s" path="res://coin_emitter.tscn" id="1_iwkbh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dkr42"]
+size = Vector2(1161, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CoinEmitter" parent="." instance=ExtResource("1_iwkbh")]
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(584.5, 587)
+shape = SubResource("RectangleShape2D_dkr42")

@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://b8x7k2nan4p5q"]
+
+[ext_resource type="Texture2D" uid="uid://df18cwe4vsey7" path="res://icon.png" id="1_icon"]
+[ext_resource type="Texture2D" uid="uid://doe41d0qcrw3o" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="2_light"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_umln5"]
+polygon = PackedVector2Array(-26, -25, 24, -25, 24, 25, -26, 25)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_square"]
+polygon = PackedVector2Array(-25, -25, 25, -25, 25, 25, -25, 25)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_character"]
+polygon = PackedVector2Array(-30, -40, 30, -40, 35, -35, 35, 35, 30, 40, -30, 40, -35, 35, -35, -35)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ljl43"]
+polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -60.8)
+
+[node name="HardShadowsDemo" type="Node2D" unique_id=423853056]
+
+[node name="Background" type="ColorRect" parent="." unique_id=399575582]
+offset_right = 1024.0
+offset_bottom = 600.0
+color = Color(0.1, 0.1, 0.2, 1)
+
+[node name="GradientBackground" type="ColorRect" parent="." unique_id=1220483755]
+offset_right = 1024.0
+offset_bottom = 600.0
+color = Color(0.2, 0.3, 0.4, 1)
+
+[node name="Ground" type="ColorRect" parent="." unique_id=76059512]
+offset_top = 500.0
+offset_right = 1024.0
+offset_bottom = 100.0
+color = Color(0.3, 0.25, 0.2, 1)
+
+[node name="Light1" type="PointLight2D" parent="." unique_id=828254119]
+position = Vector2(353, 262)
+color = Color(1, 0.8, 0.6, 1)
+energy = 2.5
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("2_light")
+texture_scale = 3.0
+
+[node name="Light2" type="PointLight2D" parent="." unique_id=811232257]
+position = Vector2(800, 200)
+color = Color(0.8, 0.9, 1, 1)
+energy = 2.0
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("2_light")
+texture_scale = 2.5
+
+[node name="Light3" type="PointLight2D" parent="." unique_id=1005107869]
+position = Vector2(280, 230)
+color = Color(0.9, 1, 0.8, 1)
+energy = 1.8
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = ExtResource("2_light")
+texture_scale = 2.0
+
+[node name="Occluders" type="Node2D" parent="." unique_id=1345153762]
+
+[node name="Square1" type="ColorRect" parent="Occluders" unique_id=1915847617]
+offset_left = 300.0
+offset_top = 400.0
+offset_right = 350.0
+offset_bottom = 450.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Occluders/Square1" unique_id=226568762]
+position = Vector2(26, 25)
+occluder = SubResource("OccluderPolygon2D_umln5")
+
+[node name="Square2" type="ColorRect" parent="Occluders" unique_id=330957126]
+offset_left = 450.0
+offset_top = 350.0
+offset_right = 500.0
+offset_bottom = 400.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Occluders/Square2" unique_id=78196059]
+occluder = SubResource("OccluderPolygon2D_square")
+
+[node name="Square3" type="ColorRect" parent="Occluders" unique_id=691393887]
+offset_left = 600.0
+offset_top = 420.0
+offset_right = 650.0
+offset_bottom = 470.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Occluders/Square3" unique_id=28361503]
+occluder = SubResource("OccluderPolygon2D_square")
+
+[node name="Character1" type="ColorRect" parent="Occluders" unique_id=1695908065]
+offset_left = 150.0
+offset_top = 350.0
+offset_right = 210.0
+offset_bottom = 430.0
+color = Color(0.6, 0.7, 0.8, 1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Occluders/Character1" unique_id=1445725476]
+occluder = SubResource("OccluderPolygon2D_character")
+
+[node name="Character2" type="ColorRect" parent="Occluders" unique_id=79103485]
+offset_left = 700.0
+offset_top = 300.0
+offset_right = 760.0
+offset_bottom = 380.0
+color = Color(0.8, 0.6, 0.7, 1)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Occluders/Character2" unique_id=188174331]
+occluder = SubResource("OccluderPolygon2D_character")
+
+[node name="Icon" type="Sprite2D" parent="Occluders" unique_id=1404620299]
+position = Vector2(543, 239)
+texture = ExtResource("1_icon")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Occluders/Icon" unique_id=26581711]
+position = Vector2(-109, 248)
+occluder = SubResource("OccluderPolygon2D_ljl43")

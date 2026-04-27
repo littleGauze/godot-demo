@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bunm4x2dkap66"]
+
+[ext_resource type="Script" uid="uid://h1eqpspoc21q" path="res://main.gd" id="1_t1wcn"]
+[ext_resource type="Texture2D" uid="uid://277fv6rr0ntk" path="res://icon.svg" id="2_1gfb3"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xj1xc"]
+polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6iex2"]
+polygon = PackedVector2Array(59.1, -64, -59, -64, -63.8, -59, -64, 61, -60.3, 64, 59.6, 64, 63.9, 59, 64, -61.1)
+
+[sub_resource type="Gradient" id="Gradient_w7c55"]
+offsets = PackedFloat32Array(0, 0.743649)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4tpc7"]
+gradient = SubResource("Gradient_w7c55")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Main" type="Node2D" unique_id=1700237134]
+script = ExtResource("1_t1wcn")
+
+[node name="Node2D" type="Node2D" parent="." unique_id=362114086]
+
+[node name="Node2D" type="Node2D" parent="Node2D" unique_id=868965485]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Node2D" unique_id=1310140063]
+position = Vector2(416, 200)
+texture = ExtResource("2_1gfb3")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D/Node2D" unique_id=2095230532]
+position = Vector2(148, 99)
+texture = ExtResource("2_1gfb3")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="Node2D/Node2D" unique_id=1416902123]
+position = Vector2(148, 99)
+occluder = SubResource("OccluderPolygon2D_xj1xc")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Node2D/Node2D" unique_id=287089537]
+position = Vector2(416, 200)
+occluder = SubResource("OccluderPolygon2D_6iex2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D" unique_id=1088960095]
+modulate = Color(1, 1, 1, 0.388235)
+scale = Vector2(8.96094, 5.03125)
+texture = ExtResource("2_1gfb3")
+centered = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D" unique_id=368856329]
+modulate = Color(1, 1, 1, 0.388235)
+scale = Vector2(8.96094, 5.03125)
+texture = ExtResource("2_1gfb3")
+centered = false
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=924411963]
+position = Vector2(555.99994, 299.99994)
+scale = Vector2(18.4375, 11.0625)
+energy = 6.01
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_4tpc7")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=2090620906]
+visible = false
+enabled = false
