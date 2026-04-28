@@ -89,6 +89,7 @@ func _physics_process(delta: float) -> void:
 	if not dash_ready_announced and dash_cooldown_timer <= 0.0:
 		dash_ready_announced = true
 		_spawn_dash_ready_particles()
+		_play_sfx(&"dash_ready", global_position, randf_range(0.98, 1.04), -6.0)
 
 	if Input.is_action_just_pressed("dash") and can_dash:
 		_start_dash(direction)
@@ -327,6 +328,8 @@ func _start_dash(direction: float) -> void:
 
 	if not is_zero_approx(dash_direction):
 		_set_facing(dash_direction < 0.0)
+
+	_play_sfx(&"dash", global_position, randf_range(0.96, 1.04), -4.5)
 
 
 func _spawn_dash_ghost() -> void:

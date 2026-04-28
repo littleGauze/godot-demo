@@ -97,6 +97,43 @@ writeWave("player_hurt.wav", preset("hitHurt", {}, (p) => {
   p.p_lpf_freq = 0.72;
 }));
 
+writeWave("dash.wav", preset("laserShoot", {}, (p) => {
+  p.wave_type = 3;
+  p.p_base_freq = 0.42;
+  p.p_freq_limit = 0.14;
+  p.p_freq_ramp = -0.2;
+  p.p_env_attack = 0.0;
+  p.p_env_sustain = 0.05;
+  p.p_env_decay = 0.12;
+  p.p_pha_offset = -0.18;
+  p.p_pha_ramp = -0.1;
+  p.p_hpf_freq = 0.08;
+}));
+
+writeWave("enemy_land.wav", preset("explosion", {}, (p) => {
+  p.wave_type = 3;
+  p.p_base_freq = 0.12;
+  p.p_freq_ramp = -0.04;
+  p.p_env_attack = 0.0;
+  p.p_env_sustain = 0.08;
+  p.p_env_decay = 0.26;
+  p.p_lpf_freq = 0.48;
+  p.p_hpf_freq = 0.0;
+  p.p_repeat_speed = 0.0;
+}));
+
+writeWave("dash_ready.wav", preset("blipSelect", {}, (p) => {
+  p.wave_type = 1;
+  p.p_base_freq = 0.74;
+  p.p_freq_ramp = 0.08;
+  p.p_env_attack = 0.0;
+  p.p_env_sustain = 0.05;
+  p.p_env_decay = 0.16;
+  p.p_pha_offset = 0.12;
+  p.p_pha_ramp = 0.1;
+  p.p_hpf_freq = 0.14;
+}));
+
 writeWave("enemy_hurt.wav", preset("hitHurt", {}, (p) => {
   p.wave_type = 3;
   p.p_base_freq = 0.11;

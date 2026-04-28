@@ -147,6 +147,7 @@ func _start_encounter() -> void:
 func _on_axeman_landed() -> void:
 	pending_spawn_lands = maxi(pending_spawn_lands - 1, 0)
 	trigger_camera_shake_downward()
+	_play_sfx(&"enemy_land", axeman_ground_position, randf_range(0.92, 1.0), -2.0)
 	if pending_spawn_lands > 0:
 		return
 
@@ -306,3 +307,9 @@ func _set_current_boss_enemy(enemy: Node) -> void:
 	boss_health_bar.visible = true
 	boss_health_bar.max_value = current_boss_enemy.get_max_health()
 	boss_health_bar.value = current_boss_enemy.current_health
+
+
+func _play_sfx(cue: StringName, position: Vector2, pitch_scale: float = 1.0, volume_db: float = 0.0) -> void:
+	var manager := get_tree().get_first_node_in_group("sfx_manager")
+	if manager != null and manager.has_method("play_cue"):
+		manager.play_cue(cue, position, pitch_scale, volume_db)

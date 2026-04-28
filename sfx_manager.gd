@@ -15,6 +15,9 @@ func _ready() -> void:
 	stream_cache[&"enemy_attack2"] = load("res://Audio/enemy_attack2.wav")
 	stream_cache[&"enemy_attack3"] = load("res://Audio/enemy_attack3.wav")
 	stream_cache[&"player_hurt"] = load("res://Audio/player_hurt.wav")
+	stream_cache[&"dash"] = load("res://Audio/dash.wav")
+	stream_cache[&"enemy_land"] = load("res://Audio/enemy_land.wav")
+	stream_cache[&"dash_ready"] = load("res://Audio/dash_ready.wav")
 	stream_cache[&"enemy_hurt"] = load("res://Audio/enemy_hurt.wav")
 	stream_cache[&"block"] = load("res://Audio/block.wav")
 
