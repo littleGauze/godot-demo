@@ -435,6 +435,66 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackZone/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackZone/CollisionShape2D:shape:radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [12.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackZone/CollisionShape2D:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [26.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackZone/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(16.000002, 2)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AttackZone/CollisionShape2D:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5615406]
+}
 
 [sub_resource type="Animation" id="Animation_hqtel"]
 resource_name = "attack1"
@@ -463,6 +523,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackZone/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.40249863, 0.5913479),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackZone/CollisionShape2D:shape:radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.40249863),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [12.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackZone/CollisionShape2D:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.40249863),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [26.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackZone/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.4038518),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(13.000002, 1.0000001)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AttackZone/CollisionShape2D:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.4038518),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5615406]
 }
 
 [sub_resource type="Animation" id="Animation_sweqy"]
@@ -493,6 +613,66 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackZone/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.49985042, 0.8178491),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackZone/CollisionShape2D:shape:radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.49985042, 0.5, 0.5011015, 0.6454311, 0.64655083, 0.73623, 0.8153841),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [9.0, 9.0, 9.0, 9.000043, 9.000043, 9.000069, 9.000069]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackZone/CollisionShape2D:shape:height")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.49985042, 0.5, 0.5011015, 0.6454311, 0.64655083, 0.73623, 0.8153841),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [48.0, 34.01706, 30.017231, 36.01697, 48.00034, 39.254, 35.998466]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackZone/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.49989724, 0.5, 0.5002406, 0.5011015, 0.6454311, 0.73623, 0.8153841),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(8.999998, 4), Vector2(0, 0), Vector2(10, 4), Vector2(-5.0000005, 2), Vector2(-2, 0.9999999), Vector2(10, 2.9999998)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AttackZone/CollisionShape2D:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.5, 0.5002406, 0.5011015, 0.6454311, 0.73623, 0.8153841),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.5615406, 1.5615406, 1.5615406, 1.5615406, 1.5615406, 1.5615406]
+}
 
 [sub_resource type="Animation" id="Animation_2hs0m"]
 resource_name = "attack3"
@@ -521,6 +701,66 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackZone/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.40919614, 0.5118513, 0.7091324, 0.97285193),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackZone/CollisionShape2D:shape:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.40945363, 0.7091324),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [29.900000000000002, 29.9]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackZone/CollisionShape2D:shape:radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.40945363, 0.7091324),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [45.57, 14.95]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackZone/CollisionShape2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.40936404, 0.7091324, 0.97285193),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(9, -2.9999998), Vector2(14, -2.999999), Vector2(26.000002, -2.9999998)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AttackZone/CollisionShape2D:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.40936404, 0.7091324, 0.97285193),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.5615406, 1.5615406, 1.5615406]
 }
 
 [sub_resource type="Animation" id="Animation_1jxqw"]
@@ -787,7 +1027,13 @@ states/walk/position = Vector2(255.67987, 262.91498)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_b26j0"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "death", "End", SubResource("AnimationNodeStateMachineTransition_urp6f"), "hurt", "death", SubResource("AnimationNodeStateMachineTransition_op7ga"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_q13i1"), "walk", "hurt", SubResource("AnimationNodeStateMachineTransition_pylmc"), "attack1", "hurt", SubResource("AnimationNodeStateMachineTransition_pbfsw"), "attack2", "hurt", SubResource("AnimationNodeStateMachineTransition_4flbx"), "attack3", "hurt", SubResource("AnimationNodeStateMachineTransition_onrkg"), "idle", "attack1", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "idle", "attack2", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "idle", "attack3", SubResource("AnimationNodeStateMachineTransition_dw050"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_nvl01"), "attack1", "idle", SubResource("AnimationNodeStateMachineTransition_ivps1"), "attack2", "idle", SubResource("AnimationNodeStateMachineTransition_bwjto"), "attack3", "idle", SubResource("AnimationNodeStateMachineTransition_606se")]
 graph_offset = Vector2(111.22522, 8.887037)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nmwtb"]
+radius = 12.0
+height = 26.0
+
 [node name="Axeman" type="CharacterBody2D" unique_id=1880576617]
+collision_layer = 8
+collision_mask = 145
 script = ExtResource("1_nmwtb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1642929150]
@@ -811,3 +1057,13 @@ parameters/conditions/isDead = false
 parameters/conditions/isHurt = false
 parameters/conditions/isIdle = false
 parameters/conditions/isMoving = false
+
+[node name="AttackZone" type="Area2D" parent="." unique_id=424654805]
+collision_layer = 4
+collision_mask = 176
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackZone" unique_id=154757377]
+position = Vector2(16.000002, 2)
+rotation = 1.5615406
+shape = SubResource("CapsuleShape2D_nmwtb")
+disabled = true

@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://br4kodjvp37a" path="res://Texture/bg/Mountains - 1.png" id="2_3hgm7"]
 [ext_resource type="Script" uid="uid://ciekfhx8e4bcb" path="res://world.gd" id="2_jjfx5"]
 [ext_resource type="Texture2D" uid="uid://b2pi27aq1mbgw" path="res://Texture/bg/Mountains - 2.png" id="3_6qm4e"]
+[ext_resource type="Script" uid="uid://33yd1xfe0pn5" path="res://sfx_manager.gd" id="3_sfxm"]
 [ext_resource type="Texture2D" uid="uid://bd1r7170fe7mn" path="res://Texture/bg/Mountains - 3.png" id="4_ewr8u"]
 [ext_resource type="Texture2D" uid="uid://bju0qdu6xqn6t" path="res://Texture/bg/Mountains - 4.png" id="5_nk0a1"]
 [ext_resource type="Texture2D" uid="uid://c6froj5xotnvt" path="res://Texture/bg/Mountains - 5.png" id="6_8n2gd"]
@@ -34,7 +35,6 @@ script = ExtResource("2_jjfx5")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=2077104741]
 layer = -10
-scroll_ignore_camera_zoom = false
 
 [node name="Mountains1" type="ParallaxLayer" parent="ParallaxBackground" unique_id=237057618]
 motion_scale = Vector2(0.1, 0)
@@ -111,6 +111,9 @@ position = Vector2(537.99994, 326)
 scale = Vector2(5, 5)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=370972605]
+
+[node name="SfxManager" type="Node" parent="." unique_id=1423321988]
+script = ExtResource("3_sfxm")
 
 [node name="Axeman" parent="." unique_id=767115568 instance=ExtResource("8_u4mb7")]
 visible = false

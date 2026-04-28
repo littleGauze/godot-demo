@@ -1,8 +1,11 @@
 extends Node2D
 
 
+const AXEMAN_SCENE = preload("res://Enemies/axeman.tscn")
 const AXEMAN_DROP_HEIGHT = 420.0
 const AXEMAN_DROP_OFFSET_X = 180.0
+const AXEMAN_SUMMON_COUNT = 10
+const AXEMAN_FORMATION_SPACING_X = 140.0
 const BATTLE_START_EXTRA_DELAY = 1.0
 const SCREEN_SHAKE_RANDOM := &"random"
 const SCREEN_SHAKE_DIRECTIONAL := &"directional"
@@ -13,6 +16,8 @@ var battle_started := false
 var battle_start_pending := false
 var battle_start_delay := 0.0
 var axeman_ground_position := Vector2.ZERO
+var pending_spawn_lands := 0
+var summoned_axeman_count := 0
 var camera_base_y := 0.0
 var camera_shake_time := 0.0
 var camera_shake_duration := 0.0
@@ -21,11 +26,13 @@ var camera_shake_direction := Vector2.ZERO
 var camera_shake_type: StringName = SCREEN_SHAKE_RANDOM
 var camera_rng := RandomNumberGenerator.new()
 var parallax_sprite_base_positions := {}
+var active_enemies: Array[Node] = []
+var current_boss_enemy: Node = null
 
 @onready var player = $Player
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var parallax_background: ParallaxBackground = $ParallaxBackground
-@onready var axeman = $Axeman
+@onready var axeman_template = $Axeman
 @onready var flag = $Platform/Items/Flag
 @onready var flag_area: Area2D = $Platform/Items/Flag/InteractArea
 @onready var player_health_bar: ProgressBar = $CanvasLayer/PlayerHealthBar
@@ -41,11 +48,10 @@ var parallax_sprite_base_positions := {}
 func _ready() -> void:
 	randomize()
 	camera_rng.randomize()
-	axeman_ground_position = axeman.global_position
+	axeman_ground_position = axeman_template.global_position
 	camera_base_y = player.global_position.y
 	_cache_parallax_sprites()
 	_bind_health_bar(player, player_health_bar)
-	_bind_health_bar(axeman, boss_health_bar)
 	_bind_endings()
 	_bind_flag()
 	_prepare_encounter()
@@ -63,12 +69,14 @@ func _process(delta: float) -> void:
 		if battle_start_delay <= 0.0:
 			battle_start_pending = false
 			battle_started = true
-			axeman.begin_battle()
+			for enemy in active_enemies:
+				if is_instance_valid(enemy):
+					enemy.begin_battle()
 
-	if summon_started or battle_started or battle_start_pending:
+	if summon_started or battle_start_pending:
 		return
 
-	if player_near_flag and Input.is_action_just_pressed("interact"):
+	if player_near_flag and summoned_axeman_count < AXEMAN_SUMMON_COUNT and Input.is_action_just_pressed("interact"):
 		_start_encounter()
 
 
@@ -91,12 +99,6 @@ func _bind_endings() -> void:
 			_show_result("You Lose")
 		)
 
-	if axeman != null:
-		axeman.died.connect(func() -> void:
-			_show_result("You Win")
-		)
-		axeman.landed.connect(_on_axeman_landed)
-
 
 func _bind_flag() -> void:
 	flag_area.body_entered.connect(_on_flag_body_entered)
@@ -106,14 +108,18 @@ func _bind_flag() -> void:
 
 
 func _prepare_encounter() -> void:
-	axeman.set_battle_active(false)
-	axeman.visible = false
+	axeman_template.set_battle_active(false)
+	axeman_template.visible = false
 	boss_label.visible = false
 	boss_health_bar.visible = false
+	active_enemies.clear()
+	pending_spawn_lands = 0
+	current_boss_enemy = null
+	summoned_axeman_count = 0
 
 
 func _on_flag_body_entered(body: Node) -> void:
-	if body != player or summon_started or battle_started:
+	if body != player or summon_started or battle_start_pending:
 		return
 
 	player_near_flag = true
@@ -126,28 +132,40 @@ func _on_flag_body_exited(body: Node) -> void:
 		return
 
 	player_near_flag = false
-	if not summon_started and not battle_started:
+	if not summon_started and not battle_start_pending:
 		flag.set_highlighted(false)
 		interact_label.visible = false
 
 
 func _start_encounter() -> void:
 	summon_started = true
-	player_near_flag = false
 	flag.set_highlighted(false)
 	interact_label.visible = false
-	axeman_ground_position = Vector2(flag.global_position.x + AXEMAN_DROP_OFFSET_X, axeman_ground_position.y)
-	var spawn_position := axeman_ground_position + Vector2(0.0, -AXEMAN_DROP_HEIGHT)
-	axeman.start_spawn_fall(spawn_position)
+	_spawn_single_axeman()
 
 
 func _on_axeman_landed() -> void:
-	summon_started = false
-	battle_start_pending = true
-	boss_label.visible = true
-	boss_health_bar.visible = true
+	pending_spawn_lands = maxi(pending_spawn_lands - 1, 0)
 	trigger_camera_shake_downward()
-	battle_start_delay = camera_shake_duration + BATTLE_START_EXTRA_DELAY
+	if pending_spawn_lands > 0:
+		return
+
+	summon_started = false
+	boss_label.visible = not active_enemies.is_empty()
+	boss_health_bar.visible = not active_enemies.is_empty()
+	if not active_enemies.is_empty():
+		_set_current_boss_enemy(active_enemies[0])
+	if battle_started:
+		var latest_enemy = active_enemies[active_enemies.size() - 1]
+		if is_instance_valid(latest_enemy):
+			latest_enemy.begin_battle()
+	else:
+		battle_start_pending = true
+		battle_start_delay = camera_shake_duration + BATTLE_START_EXTRA_DELAY
+
+	if player_near_flag and summoned_axeman_count < AXEMAN_SUMMON_COUNT:
+		flag.set_highlighted(true)
+		interact_label.visible = true
 
 
 func _show_result(message: String) -> void:
@@ -216,3 +234,75 @@ func _apply_parallax_shake(shake_offset: Vector2) -> void:
 			sprite.scale.y if not is_zero_approx(sprite.scale.y) else 1.0
 		)
 		sprite.position = base_position - (shake_offset / scale_safe)
+
+
+func _spawn_single_axeman() -> void:
+	pending_spawn_lands += 1
+	var enemy = _create_axeman_instance()
+	var formation_offset: float = float(summoned_axeman_count) * AXEMAN_FORMATION_SPACING_X
+	var ground_position: Vector2 = Vector2(flag.global_position.x + AXEMAN_DROP_OFFSET_X + formation_offset, axeman_ground_position.y)
+	var spawn_position: Vector2 = ground_position + Vector2(0.0, -AXEMAN_DROP_HEIGHT)
+	summoned_axeman_count += 1
+	enemy.start_spawn_fall(spawn_position)
+
+
+func _create_axeman_instance() -> Node:
+	var enemy = AXEMAN_SCENE.instantiate()
+	enemy.scale = axeman_template.scale
+	enemy.visible = false
+	add_child(enemy)
+	active_enemies.append(enemy)
+	_bind_enemy(enemy)
+	return enemy
+
+
+func _bind_enemy(enemy: Node) -> void:
+	enemy.health_changed.connect(func(current: int, maximum: int) -> void:
+		if enemy != current_boss_enemy:
+			return
+		boss_health_bar.max_value = maximum
+		boss_health_bar.value = current
+	)
+	enemy.died.connect(func() -> void:
+		_on_enemy_died(enemy)
+	)
+	enemy.landed.connect(_on_axeman_landed)
+
+
+func _on_enemy_died(enemy: Node) -> void:
+	active_enemies = active_enemies.filter(func(existing: Node) -> bool:
+		return is_instance_valid(existing) and existing != enemy
+	)
+
+	if active_enemies.is_empty():
+		current_boss_enemy = null
+		boss_health_bar.visible = false
+		boss_label.visible = false
+		if summoned_axeman_count >= AXEMAN_SUMMON_COUNT:
+			_show_result("You Win")
+		elif player_near_flag:
+			flag.set_highlighted(true)
+			interact_label.visible = true
+		return
+
+	var next_enemy = active_enemies[0]
+	if is_instance_valid(next_enemy):
+		_set_current_boss_enemy(next_enemy)
+
+
+func _clear_active_enemies() -> void:
+	for enemy in active_enemies:
+		if is_instance_valid(enemy):
+			enemy.queue_free()
+	current_boss_enemy = null
+
+
+func _set_current_boss_enemy(enemy: Node) -> void:
+	current_boss_enemy = enemy
+	if current_boss_enemy == null or not is_instance_valid(current_boss_enemy):
+		boss_health_bar.visible = false
+		return
+
+	boss_health_bar.visible = true
+	boss_health_bar.max_value = current_boss_enemy.get_max_health()
+	boss_health_bar.value = current_boss_enemy.current_health
