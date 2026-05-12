@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://gvem223h1p15"]
+
+[node name="RichTextLabel" type="RichTextLabel" unique_id=1877668142]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[shake rate=50.0 level=5 connected=1] [font_size=50]Hello[/font_size] [/shake]"

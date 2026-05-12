@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://m01moqxhkh6j"]
+
+[ext_resource type="Script" uid="uid://dcf2kw8c4hw4g" path="res://random_noise.gd" id="1_38t4g"]
+
+[node name="RandomNoise" type="Node2D" unique_id=500773699]
+script = ExtResource("1_38t4g")
