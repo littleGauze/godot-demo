@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://wg5xksagcwno"]
+
+[ext_resource type="Theme" uid="uid://cirebp8dyojng" path="res://Theme/new_theme.tres" id="1_b3bc3"]
+
+[node name="Control" type="Control" unique_id=628810749]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_b3bc3")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2033400358]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1989215755]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=2074386478]
+layout_mode = 2
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=605734089]
+layout_mode = 2
+size_flags_vertical = 0
+text = "button1"
+
+[node name="Button4" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=611782322]
+layout_mode = 2
+size_flags_vertical = 0
+text = "button2"
+
+[node name="Button3" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1461436238]
+layout_mode = 2
+size_flags_vertical = 0
+text = "button3"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/VBoxContainer" unique_id=1065281397]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[shake rate=20.0 level=5 connected=1][font_size=50]Hello[/font_size][/shake]
+hello [color=green]world[/color]
+
+[pulse freq=1.0 color=#ff000040 ease=-2.0][font_size=40]Hello[/font_size][/pulse]
+
+[wave amp=50.0 freq=5.0 connected=1]Wave makes the text go up and down[/wave]
+
+[tornado radius=50.0 freq=2.0 connected=1]Tornado makes the text move around in a circle[/tornado]
+
+[shake rate=20.0 level=4 connected=1]Shake makes the text shake. Its tag format[/shake]"

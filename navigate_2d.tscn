@@ -1,100 +1,102 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnjoghj0usk88"]
+[gd_scene format=3 uid="uid://bnjoghj0usk88"]
 
 [ext_resource type="PackedScene" uid="uid://de5ahpt1eraof" path="res://agent.tscn" id="1_hgkfk"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_hgkfk"]
-vertices = PackedVector2Array(488.0625, 628, 14.9296875, 633.8672, 11.0625, 20.78125, 139.21875, 18, 246.07813, 18, 903.1094, 637.9922, 426.14063, 15, 1136.0078, 16.96875, 1136.9766, 635.1172)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 0, 4, 6, 7, 8)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(139, 8, 246, 8, 426, 5, 1146, 7, 1147, 645, 903, 648, 488, 638, 5, 644, 1, 11)])
+vertices = PackedVector2Array(733, 390, 933.90625, 449.46875, 486.02344, 628.02344, 560, 441, 660.0781, 62.75, 1136.0078, 17.976563, 1136.9609, 623.2422, 714, 226, 14.9296875, 633.8672, 11.0625, 20.78125, 133.42188, 18.117188, 288.47656, 275.53906, 495, 273, 597, 186)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 1, 7), PackedInt32Array(2, 8, 9, 10, 11), PackedInt32Array(3, 2, 11, 12), PackedInt32Array(12, 11, 4, 13), PackedInt32Array(7, 13, 4), PackedInt32Array(7, 1, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(139, 8, 292, 262, 657, 53, 1146, 7, 1147, 645, 932, 461, 488, 638, 5, 644, 1, 11)])
 
-[node name="Navigate2D" type="Node2D"]
+[node name="Navigate2D" type="Node2D" unique_id=1126797111]
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=730004254]
 navigation_polygon = SubResource("NavigationPolygon_hgkfk")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D23" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D24" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D25" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D26" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D27" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D28" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D29" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D30" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D31" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D32" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D33" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D4" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D5" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D6" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D2" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D7" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D8" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D9" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D3" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D10" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D11" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D12" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D13" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D14" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D15" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D16" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D34" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D35" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D36" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D37" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D38" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D39" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D40" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D41" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D42" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D17" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D18" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D19" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D20" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D21" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="CharacterBody2D22" parent="." instance=ExtResource("1_hgkfk")]
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="NavigationRegion2D" unique_id=1544478743]
 vertices = PackedVector2Array(495, 273, 597, 186, 714, 226, 733, 390, 560, 441)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="CharacterBody2D" parent="." unique_id=1294335359 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D23" parent="." unique_id=1997713326 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D24" parent="." unique_id=1486350336 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D25" parent="." unique_id=232419325 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D26" parent="." unique_id=218171609 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D27" parent="." unique_id=2128776802 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D28" parent="." unique_id=65237884 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D29" parent="." unique_id=464436012 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D30" parent="." unique_id=94179171 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D31" parent="." unique_id=2142878213 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D32" parent="." unique_id=1083459608 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D33" parent="." unique_id=1040564424 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D4" parent="." unique_id=1641003468 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D5" parent="." unique_id=1563795198 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D6" parent="." unique_id=1284375392 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D2" parent="." unique_id=805877197 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D7" parent="." unique_id=469951702 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D8" parent="." unique_id=1178287603 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D9" parent="." unique_id=1300883019 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D3" parent="." unique_id=1164659822 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D10" parent="." unique_id=1019992800 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D11" parent="." unique_id=953952315 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D12" parent="." unique_id=137044795 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D13" parent="." unique_id=561986065 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D14" parent="." unique_id=24267640 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D15" parent="." unique_id=827277700 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D16" parent="." unique_id=883387508 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D34" parent="." unique_id=942731008 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D35" parent="." unique_id=1277422676 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D36" parent="." unique_id=1103673997 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D37" parent="." unique_id=414866226 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D38" parent="." unique_id=747219389 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D39" parent="." unique_id=867742146 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D40" parent="." unique_id=1566535240 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D41" parent="." unique_id=1308055804 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D42" parent="." unique_id=1128105638 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D17" parent="." unique_id=1253440079 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D18" parent="." unique_id=1040353146 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D19" parent="." unique_id=775383499 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D20" parent="." unique_id=229423443 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D21" parent="." unique_id=1056046101 instance=ExtResource("1_hgkfk")]
+
+[node name="CharacterBody2D22" parent="." unique_id=425013213 instance=ExtResource("1_hgkfk")]
