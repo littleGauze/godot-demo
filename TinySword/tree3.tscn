@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://cgxsdsbpb7eap"]
+
+[ext_resource type="Texture2D" uid="uid://b5gki6jog028q" path="res://TinySword/Texture/Tree/Tree3.png" id="1_th0i8"]
+[ext_resource type="Script" path="res://TinySword/tree.gd" id="2_l0rlk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4hln"]
+atlas = ExtResource("1_th0i8")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3g8s"]
+atlas = ExtResource("1_th0i8")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll072"]
+atlas = ExtResource("1_th0i8")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ntuv"]
+atlas = ExtResource("1_th0i8")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06vf8"]
+atlas = ExtResource("1_th0i8")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvotb"]
+atlas = ExtResource("1_th0i8")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mitco"]
+atlas = ExtResource("1_th0i8")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prr1p"]
+atlas = ExtResource("1_th0i8")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68stl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4hln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3g8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll072")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ntuv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06vf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvotb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mitco")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prr1p")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="Tree1" type="Node2D" unique_id=1809709494]
+script = ExtResource("2_l0rlk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1597838509]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_68stl")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.5118065
+offset = Vector2(0, -47)
