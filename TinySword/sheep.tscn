@@ -181,7 +181,7 @@ animations = [{
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_48rxh"]
-radius = 126.00397
+radius = 224.5707
 
 [node name="Sheep" type="CharacterBody2D" unique_id=1531589140]
 z_index = 1

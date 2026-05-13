@@ -7,11 +7,22 @@
 [ext_resource type="Texture2D" uid="uid://de86vjl1fdp0w" path="res://TinySword/Texture/Tileset/Tilemap_color3.png" id="5_wdvpd"]
 [ext_resource type="Texture2D" uid="uid://nob15v5xe3me" path="res://TinySword/Texture/Tileset/Tilemap_color1.png" id="6_3v56s"]
 [ext_resource type="PackedScene" uid="uid://bfkqru002jgrb" path="res://TinySword/warrior.tscn" id="7_p508b"]
+[ext_resource type="Texture2D" uid="uid://bp10t87i3qofj" path="res://TinySword/Texture/Decoration/Rubber duck.png" id="8_68gaj"]
 [ext_resource type="PackedScene" uid="uid://d4lwk4ptkc2an" path="res://TinySword/tree1.tscn" id="8_mgu1k"]
 [ext_resource type="PackedScene" uid="uid://dtv4xkbbdm6ps" path="res://TinySword/tree2.tscn" id="8_wkokx"]
 [ext_resource type="PackedScene" uid="uid://cgxsdsbpb7eap" path="res://TinySword/tree3.tscn" id="9_6n3q8"]
+[ext_resource type="Texture2D" uid="uid://cpacn336r3wie" path="res://TinySword/Texture/Decoration/Water Rocks_01.png" id="9_i283g"]
 [ext_resource type="PackedScene" uid="uid://cmu0v0nrh8r6a" path="res://TinySword/tree4.tscn" id="10_68gaj"]
+[ext_resource type="Texture2D" uid="uid://bqpda6jwakcda" path="res://TinySword/Texture/Decoration/Water Rocks_02.png" id="10_qyeyf"]
+[ext_resource type="Texture2D" uid="uid://r3laxovqv70l" path="res://TinySword/Texture/Decoration/Rock1.png" id="11_lxsxm"]
+[ext_resource type="Texture2D" uid="uid://c5hw0bnccodk7" path="res://TinySword/Texture/Decoration/Rock2.png" id="12_t3ppp"]
+[ext_resource type="Texture2D" uid="uid://dkojw4sapjxyi" path="res://TinySword/Texture/Decoration/Rock3.png" id="13_ipgr5"]
 [ext_resource type="Script" uid="uid://d12t0652lqfib" path="res://TinySword/tiny_sword_world.gd" id="13_u73x0"]
+[ext_resource type="Texture2D" uid="uid://cmufnpbkip0in" path="res://TinySword/Texture/Decoration/Rock4.png" id="14_1l5v2"]
+[ext_resource type="Texture2D" uid="uid://dxwrv22dpvtr4" path="res://TinySword/Texture/Decoration/Bushe1.png" id="15_vemg5"]
+[ext_resource type="Texture2D" uid="uid://cuw0wp5an1i3l" path="res://TinySword/Texture/Decoration/Bushe2.png" id="16_t3ppp"]
+[ext_resource type="Texture2D" uid="uid://chnvd3vybpu3t" path="res://TinySword/Texture/Decoration/Bushe3.png" id="17_ipgr5"]
+[ext_resource type="Texture2D" uid="uid://blq0m5sf3xir2" path="res://TinySword/Texture/Decoration/Bushe4.png" id="18_1l5v2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4ucwf"]
 vertices = PackedVector2Array(49, -305, 148.50781, -305, 113, -270.0703, 561, 79, 662.1406, 79, 625, 116.53125, 914.5469, -261.15625, 874.0625, -305, 1039, -305, 1043.6328, 84.359375, 1043.6328, 20.671875, 1044.6328, 20.9375, 1181.9063, 79, 1181.9063, 143, 1015.5781, -49.023438, 1015.1406, -17.78125, 1009, -19.382813, 1008.97656, -49.039063, 111.34375, -399, 112.21875, -390.53906, 79.88281, -390.96875, 81.46875, -404.82813, 751.34375, -271, 752.21875, -262.53906, 719, -262.97656, 719, -271, 719.2969, -305.60938, 623.34375, -335, 624.21875, -326.53906, 591, -326.97656, 591, -335, 591.2969, -369.60938, 369, -271, 369, -264.5078, 335.72656, -264.07813, 336.3203, -271, 367.07813, -297.8828, 1007.96094, -405.7422, 1008, -404.71094, 943.97656, -405.35156, 948.1172, -561, 944, -404.71094, 879.97656, -405.35156, 880, -404.71094, 815.97656, -405.35156, 1009, -561, 1009, -405.70313, 1046.4297, -369, 1201, -369, 1201, -341.70313, 1199.9609, -341.7422, 1046.4297, -363.0078, -46.53125, -276.82813, -49, -276.7422, -49, -305, -21.75, -305, -21.78125, -302.9297, 17.46875, -340.82813, 15, -340.7422, 15, -369, 43.382813, -369, 43.640625, -361.46094, 103.46094, -622.4375, 79, -404.7422, 79, -625, 103.546875, -625, 1713, 415.46875, 1697.9609, 415.9922, 1697.9609, 369, 1713, 410.03906, 1679, 350.4375, 1633.9609, 351.9922, 1633.9609, 305, 1777, 346.03906, -49, 542.4375, -94.03906, 543.9922, -94.03906, 497, 399, 143, -113, 478.4375, -158.03906, 479.9922, -158.03906, 433, -177, 350.4375, -222.03906, 351.9922, -222.03906, 305, 2142.5469, 305, 2097, 346.03906, 2047.7813, 350.96875, 2017.9609, 351.9922, 2017.9609, 305, 2144.6406, 241, 831.78125, 606.96875, 801.96094, 607.9922, 801.96094, 561, 847, 207, 703.78125, 542.96875, 673.96094, 543.9922, 673.96094, 497, -0.21875, 606.96875, -30.039063, 607.9922, -30.039063, 561, 1195.1563, -59.9375, 1167, -58.992188, 1167, -79, 1195.1328, -63.929688, 1195.1328, -83.65625, 143, -626.4375, 143, -689, 231.54688, -689, 231.46094, -686.4375, 206.74219, -399, 718.7031, -335, 817.6875, -369, 825.7578, -369, 824.71875, -336.96094, 813.3828, -318.20313, 2269.9063, 79, 2271.7734, 79, 2270.7813, 113, 2270.5469, 113, 1181.9063, 335, 1183.7734, 335, 1182.7813, 369, 1182.5469, 369, 1044.7109, 15, 1183.7734, 15, 1183.7734, 79, 1183.7734, 143, 1181.9063, 207, 1183.7734, 207, 1181.9063, 271, 1183.7734, 271, 753, -753, 753, -725.1875, 749.53125, -725.27344, 271, -753, 271, -690.4375, 755.1406, -689, 1888.6016, -225.11719, 1905, -225.49219, 1905, -223.1875, 1889.2422, -177, 1649, -305, 1649, -180.39844, 902.4297, -177, 910.2422, -195.14063, 1620.8828, -301.59375, 1236.8828, -305, 1386.25, -305, 1386.2188, -302.9297, 1236.8828, -301.59375, -113, -241, -85.75, -241, -85.78125, -238.92969, -113, -15, -21.03125, -19.679688, -20.992188, -15, -50.476563, -242.17969, 1999, -221.82031, 1999, -222.74219, 2033, -222.25, 2033, -219.96875, 1807, -157.82031, 1807, -158.74219, 1871, -157.82031, 1748.8828, -134.34375, 1748.8828, -158.65625, 1807, -77.46875, 881, -689, 881, -661.6719, 875.46875, -661.75, 945, -625, 945, -597.6719, 939.46875, -597.75, 884.1172, -625, -159.39063, -33.117188, -148.59375, -33.359375, -148.13281, 20.96875, -158.28125, -15, 2079.5938, -221.53125, 2080.2031, -191.92188, 2077.9063, -113, 2225, -27.96875, 2271.5938, -29.53125, 2272.2031, 0.0703125, 1807, -53.976563, 2097, -91.96875, 2143.5938, -93.53125, 2144.5234, -49, 1805.0078, -3.4765625, 1788.4766, -46.3125, 433, -335, 433, -328.5078, 406.4297, -328.17188, 406.4297, -334.9375, 432.97656, -369.03906, 199.60938, -334.34375, 198.0625, -369.20313, 207.25781, -369.53125, 202.89063, -334.03906, 1679, 79, 1679, 20.320313, 1683.6328, 20.359375, 847, 148.32031, 851.6328, 148.35938, 1039, 143, 1039, 84.32031, 399, 84.32031, 403.6328, 84.359375, 527, 79, 527, 20.320313, 531.6328, 20.359375, 555.8672, 20.96875, -158.28125, 49, -143, 20.929688, -143, 79, -158.72656, 143, -20.132813, 84.96875, -15, 84.92969, -15, 143, 561, 20.929688, 1633.7188, 113, 1633.4063, 113, 1633.5781, 79, 1633.4063, 305, 1633.7188, 241, 1633.4063, 241, 1633.7188, 177, 1633.4063, 177, -158.59375, 433, -158.28125, 369, -222.59375, 305, -222.28125, 241, -222.59375, 241, -222.28125, 177, -177, 157.84375, -158.59375, 49, 2097, 351.20313, 881, 606.89844, 881, 607.2031, 49, 606.89844, 49, 607.2031, 1797.3281, 15, 1905, 286.89844, 1905, 287.20313, 1841, 286.89844, 945, 602.03906, 945, 607.2031, 561, 478.89844, 561, 479.20313, 497, 478.89844, 497, 479.20313, 433, 478.89844, 369, 538.03906, 369, 543.2031, 305, 542.89844, 241, 602.03906, 241, 607.2031, 177, 606.89844, 177, 607.2031, 113, 606.89844, 113, 607.2031, 1423, -306.3203, 1423, -369, 1585, -369, 1585, -307.14063, 1620.8828, -305, 1201.5938, -307.04688, 895.21094, -227.99219, 440.4297, -369.02344, 440.4297, -335, 376.4297, -297.8828, 376.4297, -271, 406.4297, -235.00781, 406.4297, -241, 463, -241, 470.4297, -299.0078, 470.4297, -305, 555.3828, -305, 555.6406, -297.46094, 1684.7109, -177, 1713, -177, 1713, -121.78906, 1684.6328, -171.13281, 1871, -177, 2097, -113, 2161, -49, 2161, -31.1875, 2225, 154.03906, 2225, 177, 2206.5469, 177, 2161, 218.03906, 2161, 241, 1999, 305, 1999, 287.35156, 1841, 305, 1822.5469, 305, 1777, 369, 1758.5469, 369, 1679, 369, 1683.6328, 15, 1649, -79, 1649, -15, 1521, -15, 1231, -76.203125, 1521, 49, 1295, 49, 1299.8672, 20.5625, 1295, 20.5625, 1259.1328, -19.65625, 1259.1328, -15, 1231, -15, 1009, 13.9296875, 1009, 49, 817, 49, 1008.47656, 13.8984375, 817, 113, 697.6797, 113, 721.28125, 67.92969, 851.6328, 143, 1137, 410.03906, 1137, 433, 1118.5469, 433, 1073, 474.03906, 1073, 497, 1054.5469, 497, 1009, 538.03906, 1009, 561, 990.5469, 561, 783, 561, 783, 543.35156, 655, 497, 655, 479.35156, 433, 497, 414.54688, 497, 305, 561, 286.54688, 561, -49, 561, -113, 497, -177, 369, -177, 143, 403.6328, 79, 531.6328, 15, 555.8203, 15, 718.15625, -15, 591, -15, 591, -76.203125, 689, -177, 555.1328, -83.65625, 555.1328, -79, 497, -79, 399, -177, 497, -15, 369, -15, 117.97656, -177, 369, 49, 15, 49, 15, -12.2109375, 712.34375, -271, 711.1406, -305.27344, 584.34375, -335, 583.1406, -369.27344, -20.179688, 79, -223.15625, 177, -223.39063, 158.85938, -159.15625, -15, 1039, -362.90625, 838.46094, -271, 399, -234.90625, 463, -298.90625, 561, -241, 561, -297.3828, 683.6406, -233.46094, 689, -233.38281, 49, -361.3828, 13.5234375, -306.1797, 2225, -30.25, 2142.7813, 305, 683.3828, -241, 1292.5703, -12.7109375, 2267.4063, 153.0625, 2203.4063, 217.0625, 2139.4063, 345.0625, 1819.4063, 345.0625, 1755.4063, 409.0625, 1179.4063, 409.0625, 1115.4063, 473.0625, 1051.4063, 537.0625, 987.40625, 601.0625, 411.40625, 537.0625, 283.40625, 601.0625, 715.0078, 50.109375, 713.1875, 49.90625, 713.3672, 14.0078125, 719.78906, 13.28125, 625, 138.02344, 623.8906, 188.64844, 1009, -0.2734375, 590.7031, -399, 1009.02344, -79, 113, -245.97656, 110.3125, -195.52344, 631.6172, 207, 209.34375, -316.1328, 433.02344, -399, 370.21094, -335.03906, 1743, -65.8125, 1743, -79, 643.52344, 145.6875, 131.52344, -238.3125, 185.78906, -271)
@@ -1066,6 +1077,163 @@ terrain_set_0/terrain_1/color = Color(0.23779312, 0.33716372, 1, 1)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_p508b")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i283g"]
+texture = ExtResource("8_68gaj")
+texture_region_size = Vector2i(32, 32)
+0:0/animation_columns = 3
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qyeyf"]
+texture = ExtResource("9_i283g")
+texture_region_size = Vector2i(64, 64)
+0:0/animation_columns = 16
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/animation_frame_8/duration = 1.0
+0:0/animation_frame_9/duration = 1.0
+0:0/animation_frame_10/duration = 1.0
+0:0/animation_frame_11/duration = 1.0
+0:0/animation_frame_12/duration = 1.0
+0:0/animation_frame_13/duration = 1.0
+0:0/animation_frame_14/duration = 1.0
+0:0/animation_frame_15/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wgit"]
+texture = ExtResource("10_qyeyf")
+texture_region_size = Vector2i(64, 64)
+0:0/animation_columns = 16
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/animation_frame_8/duration = 1.0
+0:0/animation_frame_9/duration = 1.0
+0:0/animation_frame_10/duration = 1.0
+0:0/animation_frame_11/duration = 1.0
+0:0/animation_frame_12/duration = 1.0
+0:0/animation_frame_13/duration = 1.0
+0:0/animation_frame_14/duration = 1.0
+0:0/animation_frame_15/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_utjt6"]
+texture = ExtResource("11_lxsxm")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p7aen"]
+texture = ExtResource("12_t3ppp")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3hu0g"]
+texture = ExtResource("13_ipgr5")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pwcel"]
+texture = ExtResource("14_1l5v2")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lxsxm"]
+texture = ExtResource("15_vemg5")
+texture_region_size = Vector2i(128, 128)
+0:0/animation_columns = 8
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ipgr5"]
+texture = ExtResource("16_t3ppp")
+texture_region_size = Vector2i(128, 128)
+0:0/animation_columns = 8
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1l5v2"]
+texture = ExtResource("17_ipgr5")
+texture_region_size = Vector2i(128, 128)
+0:0/animation_columns = 8
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vemg5"]
+texture = ExtResource("18_1l5v2")
+texture_region_size = Vector2i(128, 128)
+0:0/animation_columns = 8
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/animation_frame_4/duration = 1.0
+0:0/animation_frame_5/duration = 1.0
+0:0/animation_frame_6/duration = 1.0
+0:0/animation_frame_7/duration = 1.0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_6n3q8"]
+tile_size = Vector2i(64, 64)
+sources/13 = SubResource("TileSetAtlasSource_i283g")
+sources/18 = SubResource("TileSetAtlasSource_qyeyf")
+sources/19 = SubResource("TileSetAtlasSource_0wgit")
+sources/20 = SubResource("TileSetAtlasSource_utjt6")
+sources/21 = SubResource("TileSetAtlasSource_p7aen")
+sources/22 = SubResource("TileSetAtlasSource_3hu0g")
+sources/23 = SubResource("TileSetAtlasSource_pwcel")
+sources/25 = SubResource("TileSetAtlasSource_lxsxm")
+sources/26 = SubResource("TileSetAtlasSource_ipgr5")
+sources/27 = SubResource("TileSetAtlasSource_1l5v2")
+sources/28 = SubResource("TileSetAtlasSource_vemg5")
+
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_p508b"]
 scenes/1/scene = ExtResource("8_mgu1k")
 scenes/2/scene = ExtResource("8_wkokx")
@@ -1112,6 +1280,8 @@ tile_map_data = PackedByteArray("AAAPAPn/AAAHAAIAAAAPAPj/AAAHAAEAAAAPAPf/AAAHAAA
 tile_set = SubResource("TileSet_wdvpd")
 
 [node name="Deco" type="TileMapLayer" parent="Map" unique_id=737285946]
+tile_map_data = PackedByteArray("AAAJAAgADQAAAAAAAAATAPb/DQAAAAAAAAASAPb/DQAAAAAAAAARAPX/DQAAAAAAAAD+//n/DQAAAAAAAAD9//r/DQAAAAAAAAATAAEADQAAAAAAAAAdAAUADQAAAAAAAAAYAAQADQAAAAAAAAAHAAEAFwAAAAAAAAAAAAIAFwAAAAAAAAANAAcAFwAAAAAAAAAPAPv/FwAAAAAAAAAQAPr/FwAAAAAAAAD///z/FwAAAAAAAAAMAPb/FwAAAAAAAAAfAP3/FwAAAAAAAAAhAAEAFwAAAAAAAAAYAP//FwAAAAAAAAAOAAIAFAAAAAAAAAARAAMAFAAAAAAAAAAGAAcAFAAAAAAAAAAEAAkAFAAAAAAAAAD//wgAFAAAAAAAAAAEAAAAFAAAAAAAAAAAAAAAFAAAAAAAAAAGAPz/FAAAAAAAAAAGAPT/FAAAAAAAAAAVAPv/FAAAAAAAAAAaAP3/FAAAAAAAAAAhAP//FAAAAAAAAAATAP//FAAAAAAAAAAaAAAAFAAAAAAAAAAXAAIAEgAAAAAAAAAQAAkAEgAAAAAAAAAFAAkAEwAAAAAAAAD+/wkAEwAAAAAAAAAiAAQAEwAAAAAAAAD8/wAAEwAAAAAAAAD8//7/EwAAAAAAAAD9//3/EwAAAAAAAAD8/wYAEgAAAAAAAAAEAAoAEwAAAAAAAAASAAcAEwAAAAAAAAATAAUAEwAAAAAAAAAfAAYAEgAAAAAAAAASAPX/EwAAAAAAAAD9//n/EwAAAAAAAAD8//r/EwAAAAAAAAAHAP//GQAAAAAAAAAFAAAAGQAAAAAAAAASAPv/GQAAAAAAAAAWAAAAGQAAAAAAAAAOAAAAGQAAAAAAAAANAPb/GQAAAAAAAAAFAPX/GQAAAAAAAAAKAP//GQAAAAAAAAAZAP//GQAAAAAAAAANAAIAGQAAAAAAAAAPAAkAGQAAAAAAAAAFAAgAGQAAAAAAAAAAAAUAGQAAAAAAAAD//wkAGgAAAAAAAAACAAkAGgAAAAAAAAAAAAkAGgAAAAAAAAD//wcAGgAAAAAAAAAPAAMAGgAAAAAAAAAQAAEAGgAAAAAAAAADAAIAGgAAAAAAAAAdAAQAGgAAAAAAAAAgAAUAGgAAAAAAAAAgAAEAGgAAAAAAAAAgAP3/GgAAAAAAAAAcAP7/GgAAAAAAAAAYAPz/GgAAAAAAAAAXAPv/GgAAAAAAAAAPAPn/GgAAAAAAAAANAPn/GgAAAAAAAAADAPn/GgAAAAAAAAAAAP3/GgAAAAAAAAAFAPv/GwAAAAAAAAACAAAAGwAAAAAAAAABAAAAGwAAAAAAAAAUAAAAGwAAAAAAAAADAAkAGwAAAAAAAAACAAgAGwAAAAAAAAAKAAYAGwAAAAAAAAAOAAUAGwAAAAAAAAAOAAgAGwAAAAAAAAASAAQAGwAAAAAAAAASAAMAGwAAAAAAAAAaAAMAGwAAAAAAAAAbAAIAGwAAAAAAAAAgAP7/GwAAAAAAAAAhAAAAGwAAAAAAAAAWAPz/GwAAAAAAAAARAPz/GwAAAAAAAAAJAPz/GwAAAAAAAAADAPb/GwAAAAAAAAAKAPX/GwAAAAAAAAAJAPX/HAAAAAAAAAALAPv/HAAAAAAAAAAEAPv/HAAAAAAAAAACAP//HAAAAAAAAAAFAP//HAAAAAAAAAAVAAAAHAAAAAAAAAANAAYAHAAAAAAAAAAbAAMAHAAAAAAAAAAgAP//HAAAAAAAAAAXAPz/HAAAAAAAAAAVAPz/HAAAAAAAAAANAPf/HAAAAAAAAAABAPn/HAAAAAAAAAAFAAoAEgAAAAAAAAAHAAgAEgAAAAAAAAAiAP//EgAAAAAAAAAiAP3/EgAAAAAAAAAaAPz/EgAAAAAAAAAUAPr/EgAAAAAAAAAQAPn/EgAAAAAAAAAAAPn/EgAAAAAAAAA=")
+tile_set = SubResource("TileSet_6n3q8")
 
 [node name="Tree" type="TileMapLayer" parent="Map" unique_id=1874283000]
 y_sort_enabled = true

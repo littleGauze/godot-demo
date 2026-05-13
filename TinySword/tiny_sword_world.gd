@@ -2,7 +2,10 @@ extends Node2D
 
 
 const SHEEP_COUNT := 20
-const NAVIGATION_SYNC_MAX_FRAMES := 8
+const NAVIGATION_SYNC_MAX_FRAMES := 60
+const SHEEP_SPAWN_ATTEMPTS := 80
+const SHEEP_SPAWN_CLEARANCE_RADIUS := 18.0
+const SHEEP_SPAWN_COLLISION_MASK := 1
 const SHEEP_SCENE := preload("res://TinySword/sheep.tscn")
 
 @onready var map: NavigationRegion2D = $Map
@@ -60,10 +63,41 @@ func _spawn_sheep() -> void:
 		return
 
 	for _index in range(SHEEP_COUNT):
-		var spawn_point := _sample_point(triangles, cumulative_areas, total_area)
+		var spawn_point := _get_random_spawn_point(
+			triangles,
+			cumulative_areas,
+			total_area
+		)
 		var sheep := SHEEP_SCENE.instantiate()
-		sheep.global_position = map.to_global(spawn_point)
+		sheep.initialize_spawn_position(spawn_point)
 		add_child(sheep)
+
+
+func _get_random_spawn_point(
+	triangles: Array[PackedVector2Array],
+	cumulative_areas: Array[float],
+	total_area: float
+) -> Vector2:
+	var fallback_point := map.to_global(_sample_point(triangles, cumulative_areas, total_area))
+
+	for _attempt in range(SHEEP_SPAWN_ATTEMPTS):
+		var point := map.to_global(_sample_point(triangles, cumulative_areas, total_area))
+		if _is_spawn_point_clear(point):
+			return point
+
+	return fallback_point
+
+
+func _is_spawn_point_clear(point: Vector2) -> bool:
+	var shape := CircleShape2D.new()
+	shape.radius = SHEEP_SPAWN_CLEARANCE_RADIUS
+
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = shape
+	query.transform = Transform2D(0.0, point)
+	query.collision_mask = SHEEP_SPAWN_COLLISION_MASK
+
+	return get_world_2d().direct_space_state.intersect_shape(query, 1).is_empty()
 
 
 func _sample_point(
@@ -103,9 +137,15 @@ func _get_player() -> CharacterBody2D:
 	return get_tree().get_first_node_in_group("player") as CharacterBody2D
 
 
-func _await_navigation_sync() -> void:
+func _await_navigation_sync() -> bool:
 	for _frame in range(NAVIGATION_SYNC_MAX_FRAMES):
 		await get_tree().physics_frame
-		var navigation_map := map.get_navigation_map()
-		if navigation_map.is_valid() and NavigationServer2D.map_get_iteration_id(navigation_map) > 0:
-			return
+		if _is_navigation_synced():
+			return true
+
+	return false
+
+
+func _is_navigation_synced() -> bool:
+	var navigation_map := map.get_navigation_map()
+	return navigation_map.is_valid() and NavigationServer2D.map_get_iteration_id(navigation_map) > 0
