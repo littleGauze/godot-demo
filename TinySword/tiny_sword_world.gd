@@ -6,17 +6,21 @@ const NAVIGATION_SYNC_MAX_FRAMES := 60
 const SHEEP_SPAWN_ATTEMPTS := 80
 const SHEEP_SPAWN_CLEARANCE_RADIUS := 18.0
 const SHEEP_SPAWN_COLLISION_MASK := 1
+const NAVIGATION_EDGE_CONNECTION_MARGIN := 0.0
 const SHEEP_SCENE := preload("res://TinySword/sheep.tscn")
 
 @onready var map: NavigationRegion2D = $Map
-@onready var follow_check_button: CheckButton = $CanvasLayer/FollowPanel/FollowCheckButton
+@onready var follow_check_button: CheckButton = $CanvasLayer/FollowPanel/VBoxContainer/FollowCheckButton
+@onready var path_check_button: CheckButton = $CanvasLayer/FollowPanel/VBoxContainer/PathCheckButton
 
 var rng := RandomNumberGenerator.new()
 
 
 func _ready() -> void:
 	rng.randomize()
+	_configure_navigation_map()
 	follow_check_button.toggled.connect(_on_follow_check_button_toggled)
+	path_check_button.toggled.connect(_on_path_check_button_toggled)
 	call_deferred("_wait_for_navigation_sync")
 
 
@@ -71,6 +75,7 @@ func _spawn_sheep() -> void:
 		var sheep := SHEEP_SCENE.instantiate()
 		sheep.initialize_spawn_position(spawn_point)
 		add_child(sheep)
+		sheep.set_debug_navigation_draw_enabled(path_check_button.button_pressed)
 
 
 func _get_random_spawn_point(
@@ -133,6 +138,11 @@ func _on_follow_check_button_toggled(toggled_on: bool) -> void:
 		sheep.set_forced_follow_player(player)
 
 
+func _on_path_check_button_toggled(toggled_on: bool) -> void:
+	for sheep in get_tree().get_nodes_in_group("sheep"):
+		sheep.set_debug_navigation_draw_enabled(toggled_on)
+
+
 func _get_player() -> CharacterBody2D:
 	return get_tree().get_first_node_in_group("player") as CharacterBody2D
 
@@ -149,3 +159,12 @@ func _await_navigation_sync() -> bool:
 func _is_navigation_synced() -> bool:
 	var navigation_map := map.get_navigation_map()
 	return navigation_map.is_valid() and NavigationServer2D.map_get_iteration_id(navigation_map) > 0
+
+
+func _configure_navigation_map() -> void:
+	var navigation_map := map.get_navigation_map()
+	if navigation_map.is_valid():
+		NavigationServer2D.map_set_edge_connection_margin(
+			navigation_map,
+			NAVIGATION_EDGE_CONNECTION_MARGIN
+		)

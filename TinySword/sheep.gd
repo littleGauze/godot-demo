@@ -8,7 +8,8 @@ const HIT_DUST_SCENE := preload("res://TinySword/Texture/VFX/dust1.tscn")
 const SHEEP_SFX := preload("res://TinySword/Audio/sheep.mp3")
 const HIT_HURT_SFX := preload("res://TinySword/Audio/hitHurt.wav")
 const MAX_HEALTH := 3
-const WALK_SPEED := 45.0
+const WALK_SPEED_MIN := 38.0
+const WALK_SPEED_MAX := 52.0
 const STATE_IDLE := &"idle"
 const STATE_WALK := &"walk"
 const STATE_GRASS := &"grass"
@@ -26,26 +27,35 @@ const NAVIGATION_SYNC_MAX_FRAMES := 60
 const NAVIGATION_CLEARANCE_RADIUS := 18.0
 const SAFE_NAVIGATION_POINT_ATTEMPTS := 16
 const SAFE_NAVIGATION_POINT_RADIUS := 72.0
+const PATH_NAVMESH_SAMPLE_STEP := 16.0
+const PATH_NAVMESH_MAX_DISTANCE := 8.0
 const PATH_TARGET_REACHED_DISTANCE := 12.0
 const HURT_FLASH_TIME := 0.12
 const MEAT_DROP_HORIZONTAL_RANGE := 18.0
 const MEAT_DROP_ARC_HEIGHT := 34.0
 const MEAT_DROP_TIME := 0.38
-const FLEE_ALERT_RADIUS := 150.0
+const FLEE_ALERT_RADIUS := 260.0
 const FLEE_DISTANCE := 120.0
 const FLEE_DURATION := 1.2
 const FLEE_REPATH_INTERVAL := 0.25
 const KNOCKBACK_SPEED := 135.0
 const KNOCKBACK_TIME := 0.16
+const DEBUG_PATH_COLOR := Color(0.1, 0.85, 1.0, 0.85)
+const DEBUG_NEXT_POINT_COLOR := Color(1.0, 0.85, 0.1, 0.95)
+const DEBUG_NEXT_DIRECTION_COLOR := Color(1.0, 0.1, 0.1, 0.95)
+const DEBUG_TARGET_COLOR := Color(0.2, 1.0, 0.25, 0.9)
+const DEBUG_REVERSE_ARROW_LENGTH := 28.0
 
 var rng := RandomNumberGenerator.new()
 var walk_noise := FastNoiseLite.new()
+var walk_speed := 45.0
 var current_state: StringName = STATE_GRASS
 var state_time_left := 0.0
 var walk_direction := Vector2.ZERO
 var walk_noise_time := 0.0
 var target_player: CharacterBody2D
 var forced_follow_player: CharacterBody2D
+var suppress_sensor_follow := false
 var navigation_refresh_left := 0.0
 var current_navigation_target := Vector2.ZERO
 var follow_slot_angle := 0.0
@@ -64,6 +74,8 @@ var flee_time_left := 0.0
 var flee_source_position := Vector2.ZERO
 var knockback_time_left := 0.0
 var knockback_velocity := Vector2.ZERO
+var debug_navigation_draw_enabled := false
+var desired_navigation_velocity := Vector2.ZERO
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var detection_area: Area2D = $Area2D
@@ -82,10 +94,13 @@ func _ready() -> void:
 	walk_noise_time = rng.randf_range(0.0, 1000.0)
 	follow_slot_angle = rng.randf_range(0.0, TAU)
 	follow_slot_radius = rng.randf_range(40.0, 84.0)
-	navigation_agent_2d.avoidance_enabled = false
-	navigation_agent_2d.max_speed = WALK_SPEED
+	walk_speed = rng.randf_range(WALK_SPEED_MIN, WALK_SPEED_MAX)
+	navigation_agent_2d.avoidance_enabled = true
+	navigation_agent_2d.max_speed = walk_speed
 	navigation_agent_2d.path_desired_distance = 10.0
 	navigation_agent_2d.target_desired_distance = FOLLOW_STOP_DISTANCE
+	navigation_agent_2d.debug_enabled = false
+	navigation_agent_2d.velocity_computed.connect(_on_navigation_velocity_computed)
 	detection_area.body_entered.connect(_on_detection_area_body_entered)
 	detection_area.body_exited.connect(_on_detection_area_body_exited)
 	call_deferred("_wait_for_navigation_sync")
@@ -123,6 +138,8 @@ func _physics_process(delta: float) -> void:
 		_apply_knockback(delta)
 		move_and_slide()
 		_update_stuck_state(delta, false)
+		if debug_navigation_draw_enabled:
+			queue_redraw()
 		return
 
 	navigation_refresh_left = maxf(0.0, navigation_refresh_left - delta)
@@ -132,6 +149,8 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		_ensure_on_navigation_mesh()
 		_update_stuck_state(delta, true)
+		if debug_navigation_draw_enabled:
+			queue_redraw()
 		return
 
 	var follow_target := _get_follow_target()
@@ -142,6 +161,8 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		_ensure_on_navigation_mesh()
 		_update_stuck_state(delta, true)
+		if debug_navigation_draw_enabled:
+			queue_redraw()
 		return
 
 	state_time_left -= delta
@@ -158,6 +179,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	_ensure_on_navigation_mesh()
 	_update_stuck_state(delta, current_state == STATE_WALK)
+	if debug_navigation_draw_enabled:
+		queue_redraw()
 
 
 func _follow_player() -> void:
@@ -166,11 +189,18 @@ func _follow_player() -> void:
 		return
 
 	if navigation_refresh_left <= 0.0:
-		var offset := Vector2.from_angle(follow_slot_angle) * follow_slot_radius
-		if not _try_set_navigation_target(follow_target.global_position + offset):
-			_stop_navigation()
-			animated_sprite_2d.play(STATE_IDLE)
+		var target_position := follow_target.global_position
+		if not is_instance_valid(forced_follow_player):
+			target_position += Vector2.from_angle(follow_slot_angle) * follow_slot_radius
+
+		if not _try_set_navigation_target(target_position):
+			_refresh_follow_slot()
 			navigation_refresh_left = FOLLOW_REPATH_INTERVAL
+			if current_navigation_path.is_empty():
+				_set_navigation_velocity(Vector2.ZERO)
+				animated_sprite_2d.play(STATE_IDLE)
+				return
+			_move_along_navigation(STATE_IDLE, STATE_WALK)
 			return
 		navigation_refresh_left = FOLLOW_REPATH_INTERVAL
 
@@ -217,8 +247,8 @@ func _flee(delta: float) -> void:
 
 func _move_along_navigation(idle_animation: StringName, move_animation: StringName) -> void:
 	if current_navigation_path.is_empty() or current_navigation_path_index >= current_navigation_path.size():
-		velocity = Vector2.ZERO
-		animated_sprite_2d.play(idle_animation)
+		_set_navigation_velocity(Vector2.ZERO)
+		_update_navigation_animation(idle_animation, move_animation)
 		return
 
 	var next_path_position := current_navigation_path[current_navigation_path_index]
@@ -230,23 +260,84 @@ func _move_along_navigation(idle_animation: StringName, move_animation: StringNa
 		next_path_position = current_navigation_path[current_navigation_path_index]
 
 	if global_position.distance_to(current_navigation_target) <= FOLLOW_STOP_DISTANCE:
-		velocity = Vector2.ZERO
-		animated_sprite_2d.play(idle_animation)
-		return
-
-	if not _is_segment_clear(global_position, next_path_position):
-		_stop_navigation()
-		animated_sprite_2d.play(idle_animation)
+		_set_navigation_velocity(Vector2.ZERO)
+		_update_navigation_animation(idle_animation, move_animation)
 		return
 
 	var move_direction := global_position.direction_to(next_path_position)
-	velocity = move_direction * WALK_SPEED
+	_set_navigation_velocity(move_direction * walk_speed)
+	_update_navigation_animation(idle_animation, move_animation)
 
-	if velocity.length_squared() <= 1.0:
+func _set_navigation_velocity(new_velocity: Vector2) -> void:
+	desired_navigation_velocity = new_velocity
+	if navigation_agent_2d.avoidance_enabled:
+		navigation_agent_2d.set_velocity(desired_navigation_velocity)
+	else:
+		_on_navigation_velocity_computed(desired_navigation_velocity)
+
+
+func _on_navigation_velocity_computed(safe_velocity: Vector2) -> void:
+	if is_dead or knockback_time_left > 0.0:
+		return
+	velocity = safe_velocity
+
+
+func _update_navigation_animation(idle_animation: StringName, move_animation: StringName) -> void:
+	if velocity.length_squared() <= 1.0 and desired_navigation_velocity.length_squared() <= 1.0:
 		animated_sprite_2d.play(idle_animation)
 	else:
 		animated_sprite_2d.play(move_animation)
-	_update_sprite_facing(velocity)
+	var facing_velocity := velocity if velocity.length_squared() > 1.0 else desired_navigation_velocity
+	_update_sprite_facing(facing_velocity)
+
+
+func _draw() -> void:
+	if not debug_navigation_draw_enabled:
+		return
+
+	if current_navigation_path.size() >= 2:
+		var local_points := PackedVector2Array()
+		for point in current_navigation_path:
+			local_points.append(to_local(point))
+		draw_polyline(local_points, DEBUG_PATH_COLOR, 2.0)
+
+	if current_navigation_target != Vector2.ZERO:
+		draw_circle(to_local(current_navigation_target), 5.0, DEBUG_TARGET_COLOR)
+
+	var next_path_position := _get_next_debug_path_position()
+	if next_path_position == Vector2.INF:
+		return
+
+	var local_next_point := to_local(next_path_position)
+	draw_circle(local_next_point, 4.0, DEBUG_NEXT_POINT_COLOR)
+
+	var next_direction := global_position.direction_to(next_path_position)
+	if next_direction.length_squared() < 0.01:
+		return
+
+	var arrow_end := global_position + next_direction * DEBUG_REVERSE_ARROW_LENGTH
+	_draw_arrow(global_position, arrow_end, DEBUG_NEXT_DIRECTION_COLOR)
+
+
+func _get_next_debug_path_position() -> Vector2:
+	if current_navigation_path.is_empty() or current_navigation_path_index >= current_navigation_path.size():
+		return Vector2.INF
+	return current_navigation_path[current_navigation_path_index]
+
+
+func _draw_arrow(from_global: Vector2, to_global: Vector2, color: Color) -> void:
+	var from := to_local(from_global)
+	var to := to_local(to_global)
+	draw_line(from, to, color, 2.0)
+
+	var direction := from.direction_to(to)
+	if direction.length_squared() < 0.01:
+		return
+
+	var left := to - direction.rotated(0.65) * 8.0
+	var right := to - direction.rotated(-0.65) * 8.0
+	draw_line(to, left, color, 2.0)
+	draw_line(to, right, color, 2.0)
 
 
 func _is_navigation_path_finished() -> bool:
@@ -261,6 +352,9 @@ func _stop_navigation() -> void:
 	navigation_agent_2d.target_position = global_position
 	current_navigation_path = PackedVector2Array()
 	current_navigation_path_index = 0
+	desired_navigation_velocity = Vector2.ZERO
+	if navigation_agent_2d.avoidance_enabled:
+		navigation_agent_2d.set_velocity(Vector2.ZERO)
 	velocity = Vector2.ZERO
 	navigation_refresh_left = 0.0
 	stuck_time = 0.0
@@ -310,6 +404,8 @@ func _update_sprite_facing(direction: Vector2) -> void:
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if forced_follow_player != null:
 		return
+	if suppress_sensor_follow:
+		return
 	if body.is_in_group("player"):
 		target_player = body as CharacterBody2D
 		_play_sfx(SHEEP_SFX)
@@ -317,6 +413,10 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if forced_follow_player != null:
+		return
+	if body.is_in_group("player") and suppress_sensor_follow:
+		suppress_sensor_follow = false
+		target_player = null
 		return
 	if body == target_player:
 		target_player = null
@@ -327,6 +427,9 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 
 func _update_target_player_from_overlaps() -> void:
 	if forced_follow_player != null:
+		return
+	if suppress_sensor_follow:
+		target_player = null
 		return
 	for body in detection_area.get_overlapping_bodies():
 		if body.is_in_group("player"):
@@ -352,9 +455,17 @@ func set_forced_follow_player(player: CharacterBody2D) -> void:
 		_pick_next_state()
 
 
+func set_debug_navigation_draw_enabled(enabled: bool) -> void:
+	debug_navigation_draw_enabled = enabled
+	navigation_agent_2d.debug_enabled = enabled
+	queue_redraw()
+
+
 func _get_follow_target() -> CharacterBody2D:
 	if is_instance_valid(forced_follow_player):
 		return forced_follow_player
+	if suppress_sensor_follow:
+		return null
 	if is_instance_valid(target_player):
 		return target_player
 	return null
@@ -409,13 +520,16 @@ func _get_complete_path(navigation_map: RID, origin: Vector2, destination: Vecto
 		navigation_map,
 		origin,
 		destination,
-		false,
+		true,
 		navigation_agent_2d.navigation_layers
 	)
 	if path.size() < 2:
 		return PackedVector2Array()
 
 	if path[path.size() - 1].distance_to(destination) > PATH_TARGET_REACHED_DISTANCE:
+		return PackedVector2Array()
+
+	if not _is_path_on_navigation_mesh(navigation_map, path):
 		return PackedVector2Array()
 
 	return path
@@ -434,9 +548,30 @@ func _is_clear_at(point: Vector2) -> bool:
 	return get_world_2d().direct_space_state.intersect_shape(query, 1).is_empty()
 
 
-func _is_segment_clear(start_point: Vector2, end_point: Vector2) -> bool:
-	var query := PhysicsRayQueryParameters2D.create(start_point, end_point, collision_mask, [get_rid()])
-	return get_world_2d().direct_space_state.intersect_ray(query).is_empty()
+func _is_path_on_navigation_mesh(navigation_map: RID, path: PackedVector2Array) -> bool:
+	for index in range(path.size() - 1):
+		if not _is_path_segment_on_navigation_mesh(navigation_map, path[index], path[index + 1]):
+			return false
+	return true
+
+
+func _is_path_segment_on_navigation_mesh(navigation_map: RID, start_point: Vector2, end_point: Vector2) -> bool:
+	var segment_length := start_point.distance_to(end_point)
+	if segment_length <= PATH_NAVMESH_SAMPLE_STEP:
+		return _is_point_on_navigation_mesh(navigation_map, start_point) and _is_point_on_navigation_mesh(navigation_map, end_point)
+
+	var sample_count := ceili(segment_length / PATH_NAVMESH_SAMPLE_STEP)
+	for sample_index in range(sample_count + 1):
+		var weight := float(sample_index) / float(sample_count)
+		var sample_point := start_point.lerp(end_point, weight)
+		if not _is_point_on_navigation_mesh(navigation_map, sample_point):
+			return false
+	return true
+
+
+func _is_point_on_navigation_mesh(navigation_map: RID, point: Vector2) -> bool:
+	var closest_point := NavigationServer2D.map_get_closest_point(navigation_map, point)
+	return point.distance_to(closest_point) <= PATH_NAVMESH_MAX_DISTANCE
 
 
 func take_damage(amount: int = 1, _source_position: Vector2 = Vector2.ZERO) -> void:
@@ -460,6 +595,9 @@ func flee_from(source_position: Vector2) -> void:
 
 	flee_source_position = source_position
 	flee_time_left = FLEE_DURATION
+	if forced_follow_player == null:
+		suppress_sensor_follow = true
+		target_player = null
 	current_state = STATE_WALK
 	stuck_time = 0.0
 	navigation_refresh_left = 0.0
@@ -478,6 +616,7 @@ func _apply_hit_knockback(source_position: Vector2) -> void:
 func _apply_knockback(delta: float) -> void:
 	knockback_time_left = maxf(0.0, knockback_time_left - delta)
 	var progress := 1.0 - (knockback_time_left / KNOCKBACK_TIME)
+	desired_navigation_velocity = Vector2.ZERO
 	velocity = knockback_velocity.lerp(Vector2.ZERO, progress)
 	animated_sprite_2d.play(STATE_WALK)
 	_update_sprite_facing(velocity)
@@ -586,8 +725,7 @@ func _resolve_stuck() -> void:
 	velocity = Vector2.ZERO
 
 	if is_instance_valid(_get_follow_target()):
-		follow_slot_angle += rng.randf_range(0.6, 1.4)
-		follow_slot_radius = rng.randf_range(32.0, 96.0)
+		_refresh_follow_slot()
 		navigation_refresh_left = 0.0
 		return
 
@@ -604,6 +742,7 @@ func _ensure_on_navigation_mesh() -> void:
 		return
 
 	velocity = Vector2.ZERO
+	desired_navigation_velocity = Vector2.ZERO
 	stuck_time = 0.0
 	navigation_refresh_left = 0.0
 
@@ -614,6 +753,11 @@ func _ensure_on_navigation_mesh() -> void:
 		navigation_agent_2d.target_position = global_position
 	current_navigation_path = PackedVector2Array()
 	current_navigation_path_index = 0
+
+
+func _refresh_follow_slot() -> void:
+	follow_slot_angle += rng.randf_range(0.6, 1.4)
+	follow_slot_radius = rng.randf_range(32.0, 96.0)
 
 
 func _await_navigation_sync() -> bool:
